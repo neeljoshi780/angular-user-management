@@ -1,63 +1,63 @@
 <h2 style="text-align: center;">
-  {{ isEditMode ? 'Update User' : 'Create User' }}
+  {{ isEditMode() ? 'Update User' : 'Create User' }}
 </h2>
 
 <form style="text-align: center;" (ngSubmit)="saveUser()">
     <div>
         <label>Username</label><br>
-        <input type="text" name="username" [(ngModel)]="user.username" placeholder="Enter Username">
+        <input type="text" name="username" [(ngModel)]="user().username" placeholder="Enter Username">
     </div>
     <br>
 
     <div>
         <label>Email</label><br>
-        <input type="email" name="email" [(ngModel)]="user.email" placeholder="Enter Email">
+        <input type="email" name="email" [(ngModel)]="user().email" placeholder="Enter Email">
     </div>
     <br>
 
-    @if (!isEditMode) {
+    @if (!isEditMode()) {
         <div>
             <label>Password</label><br>
-            <input type="password" name="password" [(ngModel)]="user.password" placeholder="Enter Password">
+            <input type="password" name="password" [(ngModel)]="user().password" placeholder="Enter Password">
         </div>
         <br>
     }
 
     <div>
         <label>First Name</label><br>
-        <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="Enter First Name">
+        <input type="text" name="firstName" [(ngModel)]="user().firstName" placeholder="Enter First Name">
     </div>
     <br>
 
     <div>
         <label>Last Name</label><br>
-        <input type="text" name="lastName" [(ngModel)]="user.lastName" placeholder="Enter Last Name">
+        <input type="text" name="lastName" [(ngModel)]="user().lastName" placeholder="Enter Last Name">
     </div>
     <br>
 
     <div>
         <label>Mobile</label><br>
-        <input type="text" name="mobile" [(ngModel)]="user.mobile" placeholder="Enter Mobile Number">
+        <input type="text" name="mobile" [(ngModel)]="user().mobile" placeholder="Enter Mobile Number">
     </div>
     <br>
 
     <div>
         <label>Gender</label><br>
-        <input type="radio" name="gender" [(ngModel)]="user.gender" value="MALE">
+        <input type="radio" name="gender" [(ngModel)]="user().gender" value="MALE">
         <label>Male</label>
-        <input type="radio" name="gender" [(ngModel)]="user.gender" value="FEMALE">
+        <input type="radio" name="gender" [(ngModel)]="user().gender" value="FEMALE">
         <label>Female</label>
     </div>
     <br>
 
     <div>
         <label>Date of Birth</label><br>
-        <input type="date" name="dateOfBirth" [(ngModel)]="user.dateOfBirth">
+        <input type="date" name="dateOfBirth" [(ngModel)]="user().dateOfBirth">
     </div>
     <br>
 
     <button type="submit">
-        {{ isEditMode ? 'Update User' : 'Create User' }}
+        {{ isEditMode() ? 'Update User' : 'Create User' }}
     </button>
     <button type="reset">
         Reset

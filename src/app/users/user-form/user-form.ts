@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../models/user';
 import { UserService } from './../services/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,9 +12,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserForm implements OnInit {
 
-  isEditMode=false;
+  isEditMode=signal(false);
 
-  user: User = {
+  user= signal<User>({
     username: '',
     email: '',
     password: '',
@@ -23,7 +23,7 @@ export class UserForm implements OnInit {
     mobile: '',
     gender: '',
     dateOfBirth: ''
-  };
+  });
 
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {}
 
@@ -32,22 +32,22 @@ export class UserForm implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
-      this.isEditMode = true;
+      this.isEditMode.set(true);
       this.userService.getUserById(Number(id)).subscribe(response => {
-        this.user = response.data;
+        this.user.set(response.data);
       });
     }
 
   }
 
   saveUser(): void {
-    if (this.isEditMode) {
-      this.userService.updateUser(this.user).subscribe(() => {
+    if (this.isEditMode()) {
+      this.userService.updateUser(this.user()).subscribe(() => {
         alert("User updated successfully");
         this.router.navigate(['/']);
       });
     } else {
-      this.userService.createUser(this.user).subscribe(() => {
+      this.userService.createUser(this.user()).subscribe(() => {
         alert("User created successfully");
         this.router.navigate(['/']);
       });
