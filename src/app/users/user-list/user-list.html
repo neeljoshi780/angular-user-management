@@ -1,0 +1,36 @@
+<button routerLink="/user-form">
+    Add User
+</button>
+<table border="1" style="margin: auto;">
+    <tr>
+        <td>ID</td>
+        <td>Username</td>
+        <td>Email</td>
+        <td>FirstName</td>
+        <td>LastName</td>
+        <td>Mobile</td>
+        <td>Gender</td>
+        <td>DateOfBirth</td>
+        <td>Action</td>
+    </tr>
+    @for(user of users(); track user.id) {
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.mobile}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.dateOfBirth}}</td>
+            <td>
+              <Button [routerLink]="['/user-form', user.id]">Edit</Button>
+              <Button (click)="deleteUser(user.id)">Delete</Button>
+            </td>
+        </tr>
+    } @empty {
+      <tr>
+        <td colspan="8" style="text-align: center;">No Users Found</td>
+      </tr>
+    }
+</table>
